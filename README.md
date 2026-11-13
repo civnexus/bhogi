@@ -4,7 +4,7 @@ A static literary website for Tridib Nandy. Live on GitHub Pages at https://civn
 
 ## Content and editorial provenance
 
-The three supplied recordings were used privately as editorial source. At the user’s request, neither recordings nor transcripts are included in the site or repository. No family names, locations, dates, or ancestral lineages have been inferred. The reading pages are explicitly labeled editorial adaptations and opening fragments, not completed first-person memoir chapters.
+The three supplied recordings were used privately as editorial source. At the user’s request, neither recordings nor transcripts are included in the site or repository. No family names, locations, dates, or ancestral lineages have been inferred. The user requested evocative first-person filler to establish the chapter outline. The chapter prose is provisional creative copy, not verified memoir text, and will be replaced with fuller source material. The source recordings and comments are private creative direction, not content to republish.
 
 `content/book.json` contains chapter titles, text, and order. Edit it, then run `python3 build.py`. Each chapter gets a directly addressable HTML page, canonical URL, social metadata, and sitemap entry. Extend the chapters array to grow the book. Chapter navigation is generated automatically. Reading settings persist only in the visitor's browser; no tracking or third-party fonts are used.
 
