@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://civnexus.github.io/bhogi/sitemap.xml
