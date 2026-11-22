@@ -94,3 +94,39 @@
     order: 1;
   }
 }
+
+.archive-clips {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+.archive-clip video {
+  display: block;
+  width: 100%;
+  height: min(58vh, 460px);
+  background: #041b1e;
+  border: 1px solid #d6b57850;
+}
+.travel-photos img {
+  object-position: center 66%;
+}
+@media (max-width: 520px) {
+  .topbar {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .topbar nav {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .archive-clips {
+    gap: 14px;
+  }
+  .archive-clip video {
+    height: auto;
+    aspect-ratio: 9 / 16;
+  }
+}
