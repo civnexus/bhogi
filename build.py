@@ -1,31 +1,115 @@
-"""Build dependency-free pages. Set SITE_URL when the custom domain is connected."""
+"""Build the public Bhogi Life site. SITE_URL overrides the production URL."""
 import os,json,html
 from pathlib import Path
 ROOT=Path(__file__).parent
-SITE=os.environ.get('SITE_URL','https://civnexus.github.io/bhogi').rstrip('/')
+SITE=os.environ.get('SITE_URL','https://www.bhogi.life').rstrip('/')
 data=json.loads((ROOT/'content/book.json').read_text())
 esc=html.escape
-DESC='Autobiography of a Bhogi: Tridib Nandy’s unfolding story of Yogi and Bhogi, spiritual inheritance, youthful mischief, and a life drawn toward the world.'
+DESC='An illustrated introduction to Tridib Nandy’s life, from spiritual roots and early Bitcoin to cannabis, Ayurveda, and traditional healers around the world.'
 def head(title,path='',prefix='',description=DESC):
  url=SITE+'/'+path
  schema={'@context':'https://schema.org','@type':'WebPage','name':title,'url':url,'description':description,'isPartOf':{'@type':'WebSite','name':data['title'],'alternateName':data['alternateTitle'],'url':SITE+'/'},'about':{'@type':'CreativeWork','name':data['title'],'alternateName':data['alternateTitle'],'author':{'@type':'Person','name':data['author']},'inLanguage':'en','creativeWorkStatus':'Work in progress'}}
- return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)}</title><meta name="description" content="{esc(description)}"><meta name="theme-color" content="#062326"><link rel="canonical" href="{url}"><meta name="robots" content="index,follow"><meta property="og:type" content="website"><meta property="og:site_name" content="Autobiography of a Bhogi"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{url}"><meta property="og:image" content="{SITE}/assets/social.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:alt" content="Autobiography of a Bhogi by Tridib Nandy — gold lettering beside an illustrated window opening onto a sunlit river"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:description" content="{esc(description)}"><meta name="twitter:image" content="{SITE}/assets/social.jpg"><meta name="twitter:image:alt" content="Autobiography of a Bhogi by Tridib Nandy"><link rel="icon" href="{prefix}favicon.ico" sizes="any"><link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="{prefix}assets/apple-touch-icon.png"><link rel="stylesheet" href="{prefix}assets/style.css"><script type="application/ld+json">{json.dumps(schema,ensure_ascii=False)}</script></head>'''
+ return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)}</title><meta name="description" content="{esc(description)}"><meta name="theme-color" content="#062326"><link rel="canonical" href="{url}"><meta name="robots" content="index,follow"><meta property="og:type" content="website"><meta property="og:site_name" content="Autobiography of a Bhogi"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{url}"><meta property="og:image" content="{SITE}/assets/bhogi-share.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:alt" content="Autobiography of a Bhogi beside a portrait of Tridib Nandy"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:description" content="{esc(description)}"><meta name="twitter:image" content="{SITE}/assets/bhogi-share.jpg"><meta name="twitter:image:alt" content="Autobiography of a Bhogi by Tridib Nandy"><link rel="icon" href="{prefix}favicon.ico" sizes="any"><link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="{prefix}assets/apple-touch-icon.png"><link rel="stylesheet" href="{prefix}assets/style.css"><script type="application/ld+json">{json.dumps(schema,ensure_ascii=False)}</script></head>'''
 def header(prefix=''):
- return f'''<a class="skip" href="#main">Skip to content</a><header class="wrap topbar"><a class="brand" href="{prefix}index.html" aria-label="bhogi.life home">bhogi<span>.</span>life</a><nav aria-label="Main navigation"><a href="{prefix}index.html#story">The story</a><a href="{prefix}index.html#chapters">Chapters</a><a href="{prefix}index.html#about">About the book</a></nav></header>'''
+ return f'''<a class="skip" href="#main">Skip to content</a><header class="wrap topbar"><a class="brand" href="{prefix}index.html" aria-label="bhogi.life home">bhogi<span>.</span>life</a><nav aria-label="Main navigation"><a href="{prefix}index.html#story">The story</a><a href="{prefix}index.html#archive">Photo archive</a><a href="{prefix}index.html#about">About the book</a></nav></header>'''
 def footer(prefix=''):
- return f'''<footer class="wrap"><span>© Tridib Nandy · Autobiography of a Bhogi</span><span>A life in the telling. <a href="{prefix}index.html#chapters">Open the book </a></span></footer>'''
-rows=''.join(f'''<a class="chapter-row" href="chapters/{c['slug']}.html"><span class="number">0{i+1}</span><div><h3>{c['title']}</h3><p>{c['subtitle']}</p></div><div><span class="status">Read chapter</span></div></a>''' for i,c in enumerate(data['chapters']))
-index=head('Autobiography of a Bhogi — Tridib Nandy')+'''<body>'''+header()+f'''<main id="main"><section class="wrap hero" aria-labelledby="book-title"><div><p class="eyebrow">A life in the telling · Tridib Nandy</p><h1 id="book-title">Autobiography<br>of a <em>Bhogi</em></h1><p class="intro">Between the inward path and the world outside, a life finds its own balance.</p><p class="byline">The unfolding story of Tridib Nandy</p><div class="buttons"><a class="button" href="chapters/the-boy-at-the-window.html">Begin the story </a><a class="textlink" href="#chapters">Explore the chapters</a></div></div><div><figure class="cover"><img src="assets/cover-860.webp" srcset="assets/cover-480.webp 480w, assets/cover-860.webp 860w" sizes="(max-width:760px) 330px, 430px" width="860" height="1290" fetchpriority="high" alt="Original gold and teal illustration: an open arched window, birds, and a river winding toward the rising sun"><figcaption class="cover-title"><span class="cover-kicker">Autobiography</span><span class="cover-of">of a</span><span class="cover-name">Bhogi</span><small>TRIDIB NANDY</small></figcaption></figure><p class="cover-caption">A world within. A world beyond.</p></div></section><div class="wrap hero-note"><span>Spiritual roots. An earthly appetite.</span><span class="star" aria-hidden="true">✦</span><span>Autobiography of a Bhogi</span></div><section class="paper" id="story"><div class="wrap"><div class="split"><div><p class="eyebrow">01 / The premise</p><h2>Two impulses.<br>One life.</h2></div><div class="prose"><p>A spiritual inheritance. A mischievous temperament. An enduring curiosity about everything beyond the window.</p><p><em>Autobiography of a Bhogi</em> explores a life between contemplation and delight—where the search for meaning travels alongside music, play, and the pleasures of being alive.</p></div></div><div class="duality"><div><h3>The Yogi</h3><p>The inward path. Spiritual inheritance. Contemplation.</p></div><div class="symbol" aria-hidden="true">∞</div><div><h3>The Bhogi</h3><p>The world’s invitation. Experience. Earthly delight.</p></div></div></div></section><section class="wrap section" id="chapters"><div class="section-head"><div><p class="eyebrow">02 / Inside the book</p><h2>Pages from a life.</h2></div><p>From the classroom window to the questions that follow us through life. Begin anywhere. Follow your curiosity.</p></div><div class="chapter-list">{rows}</div></section><section class="quote-section"><div class="wrap"><p class="eyebrow">The spirit of the story</p><h2 class="manifesto">An appetite for the world.<br>A curiosity about <em>what lies within.</em></h2></div></section><section class="wrap section" id="about"><div class="split author-section"><figure class="author-portrait"><img src="assets/tridib-nandy.png" width="420" height="455" loading="lazy" decoding="async" alt="Tridib Nandy standing on a stone mountain path"><figcaption>Tridib Nandy</figcaption></figure><div><p class="eyebrow">03 / About the book</p><h2>Life, in all<br>its colours.</h2><div class="prose"><p><em>Autobiography of a Bhogi</em> is Tridib Nandy’s unfolding account of spiritual inheritance and earthly experience.</p><p>A childhood full of mischief. The pull of music and sport. Birds beyond a classroom window. The inward and outward journeys begin in the same place: a restless curiosity.</p><p>A story about taking life seriously enough to wonder, and lightly enough to enjoy the journey.</p></div></div></div></section><section class="closing wrap"><p class="eyebrow">Biography of Bhogi · Tridib Nandy</p><h2>Every life has a window.<br>This one is opening.</h2><p>Step into a life of mischief, meaning, and the pleasure of discovery.</p><a class="button" href="chapters/the-boy-at-the-window.html">Meet the boy at the window </a></section></main>'''+footer()+'''</body></html>'''
+ return f'''<footer class="wrap"><span>© Tridib Nandy · Autobiography of a Bhogi</span><span>A life in the telling. <a href="{prefix}index.html#story">Explore the story</a></span></footer>'''
+def photo(name, alt, caption, css_class='', priority=False):
+    loading = 'fetchpriority="high"' if priority else 'loading="lazy" decoding="async"'
+    return f'''<figure class="story-photo {css_class}"><img src="assets/photos/{name}.webp" {loading} alt="{esc(alt)}"><figcaption>{esc(caption)}</figcaption></figure>'''
+
+archive = [
+    ('around-the-table', 'A group laughing around a table', 'Around the table'),
+    ('bombay-hemp-company', 'Three people smiling beneath a Bombay Hemp Company sign', 'At Bombay Hemp Company'),
+    ('ayush-entrance', 'Tridib beside the Ministry of AYUSH entrance sign', 'Outside India’s Ministry of AYUSH'),
+    ('out-on-the-water', 'Two people aboard a white boat', 'Out on the water'),
+    ('group-portrait', 'Four people standing together indoors', 'From the personal archive'),
+    ('cannabis-market', 'Panoramic view of cannabis retail counters', 'Inside a cannabis marketplace'),
+]
+
+index = head('Autobiography of a Bhogi | Tridib Nandy') + '<body>' + header() + f'''
+<main id="main">
+  <section class="wrap hero" aria-labelledby="book-title">
+    <div>
+      <p class="eyebrow">A memoir in progress · Tridib Nandy</p>
+      <h1 id="book-title">Autobiography<br>of a <em>Bhogi</em></h1>
+      <p class="intro">From a pious childhood to early Bitcoin, cannabis, and the traditional healers he met along the way.</p>
+      <a class="button" href="#story">Explore the story</a>
+    </div>
+    {photo('tridib-portrait', 'Tridib Nandy smiling at an outdoor café table', 'Tridib Nandy', 'hero-portrait', priority=True)}
+  </section>
+
+  <section class="paper" id="story">
+    <div class="wrap">
+      <div class="split">
+        <h2>The boy at<br>the window</h2>
+        <div class="prose">
+          <p>Tridib grew up in a pious family among stories of yogis. At school, his attention drifted toward the birds outside the classroom. Music and sport were easier to pay attention to. That boyhood tug between contemplation and the world beyond the window gives the memoir its starting point.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section story-section" aria-label="The story outline">
+    <article class="story-feature">
+      <div class="prose">
+        <h2>Before Bitcoin<br>was a household word</h2>
+        <p>Tridib traces his discovery of Bitcoin to a sabbatical in Hawaiʻi around 2010–11. By December 2013, India’s first Bitcoin conference was drawing people to Bangalore to talk about how digital money might work in practice. For Tridib, that early interest grew into work on digital currency and payment infrastructure.</p>
+        <p class="story-sources"><a href="https://tridibnandy.tech/">Tridib’s professional biography</a> · <a href="https://cio.economictimes.indiatimes.com/news/corporate-news/bangalore-to-host-indias-first-bitcoin-conference/26413131">2013 conference coverage</a></p>
+      </div>
+      {photo('coastal-road', 'A white convertible parked beside the ocean', 'A coastal drive from the personal archive')}
+    </article>
+
+    <article class="story-feature">
+      {photo('cannabis-archive', 'Tridib working with cannabis plants by hand', 'A photograph from Tridib’s cannabis years')}
+      <div class="prose">
+        <h2>Cannabis and the people behind it</h2>
+        <p>Cannabis took Tridib into a world of growers, entrepreneurs, and advocates. The photographs bring that part of the story down to earth, from working with the plant by hand to visiting a retail floor and meeting people at Bombay Hemp Company.</p>
+        <p class="story-sources"><a href="https://www.thevalintgroup.com/our-team">Valint Group biography</a></p>
+      </div>
+    </article>
+
+    <article class="story-feature">
+      <div class="prose">
+        <h2>In the company<br>of healers</h2>
+        <p>Tridib’s interest in traditional medicine brought him into contact with healers around the world. In India, the photo archive takes us from the entrance of the Ministry of AYUSH to an Ayurvedic research division. The memoir will follow the people he met and worked with, and what they taught him about how knowledge is passed from one person to another.</p>
+      </div>
+      {photo('ayurveda-research', 'Two people in front of an Ayurvedic research division sign', 'At an Ayurvedic drug discovery and development division')}
+    </article>
+  </section>
+
+  <section class="paper" id="archive">
+    <div class="wrap">
+      <h2>From the photo archive</h2>
+      <div class="photo-grid">{''.join(photo(*item) for item in archive)}</div>
+    </div>
+  </section>
+
+  <section class="wrap section" id="about">
+    <div class="split about-book">
+      <figure class="cover"><img src="assets/cover-860.webp" srcset="assets/cover-480.webp 480w, assets/cover-860.webp 860w" sizes="(max-width:760px) 270px, 320px" width="860" height="1290" loading="lazy" decoding="async" alt="Illustrated book cover showing a golden arched window opening onto a river"><figcaption class="cover-title"><span class="cover-kicker">Autobiography</span><span class="cover-of">of a</span><span class="cover-name">Bhogi</span><small>TRIDIB NANDY</small></figcaption></figure>
+      <div class="prose">
+        <h2>About the book</h2>
+        <p>The title is a nod to Paramahansa Yogananda’s <em>Autobiography of a Yogi</em>. Tridib gives the title a turn of his own. The bhogi is drawn to the world and wants to see what experience can teach him. That impulse runs through the boy at the window and the man who went looking for unfamiliar ideas and people.</p>
+        <p>The full memoir will appear here as an online book as Tridib develops it.</p>
+      </div>
+    </div>
+  </section>
+</main>''' + footer() + '</body></html>'
 (ROOT/'index.html').write_text(index)
-for i,c in enumerate(data['chapters']):
- prev=data['chapters'][i-1] if i else None
- nxt=data['chapters'][i+1] if i+1<len(data['chapters']) else None
- nav=(f'<a href="{prev["slug"]}.html"> {prev["title"]}</a>' if prev else '<a href="../index.html#chapters"> Contents</a>')+(f'<a href="{nxt["slug"]}.html">{nxt["title"]} </a>' if nxt else '<a href="../index.html#chapters">Back to contents </a>')
- page=head(c['title']+' — Autobiography of a Bhogi','chapters/'+c['slug']+'.html','../',c['subtitle'])+'<body class="reader"><div class="progress" aria-hidden="true"></div>'+header('../')+f'''<main id="main" class="reader-main"><article><p class="eyebrow">Autobiography of a Bhogi · Chapter {i+1}</p><h1>{c['title']}</h1><p class="lead">{c['subtitle']}</p><div class="reader-tools"><span>Make yourself comfortable</span><button data-size="-2" aria-label="Decrease text size">A−</button><button data-size="2" aria-label="Increase text size">A+</button><button data-theme aria-pressed="false">Night reading</button></div><div class="body-copy">{''.join('<p>'+esc(p)+'</p>' for p in c['paragraphs'])}</div><nav class="chapter-nav" aria-label="Chapter navigation">{nav}</nav></article></main>'''+footer('../')+'<script src="../assets/reader.js" defer></script></body></html>'
- (ROOT/'chapters'/f'{c["slug"]}.html').write_text(page)
-urls=[SITE+'/']+[SITE+'/chapters/'+c['slug']+'.html' for c in data['chapters']]
+
+for chapter in data['chapters']:
+    target = '../index.html#story'
+    (ROOT/'chapters'/f"{chapter['slug']}.html").write_text(
+        '<!doctype html><html lang="en"><head><meta charset="utf-8">'
+        '<title>The story | Bhogi Life</title><meta name="robots" content="noindex">'
+        f'<meta http-equiv="refresh" content="0;url={target}">'
+        f'</head><body><p><a href="{target}">Explore the story</a></p></body></html>'
+    )
+
+urls = [SITE+'/']
 (ROOT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join('<url><loc>'+u+'</loc></url>' for u in urls)+'</urlset>\n')
 (ROOT/'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: '+SITE+'/sitemap.xml\n')
 (ROOT/'.nojekyll').touch()
-(ROOT/'404.html').write_text(head('Page not found — Bhogi',prefix=SITE+'/')+'<body>'+header(SITE+'/')+ '<main id="main" class="wrap section"><p class="eyebrow">A page beyond the story</p><h1>This page has not been written.</h1><p><a href="'+SITE+'/">Return to the book </a></p></main>'+footer()+'</body></html>')
-print('Built home, 3 chapters, sitemap, robots and 404 for '+SITE)
+(ROOT/'404.html').write_text(head('Page not found — Bhogi',prefix=SITE+'/')+'<body>'+header(SITE+'/')+ '<main id="main" class="wrap section"><p class="eyebrow">A page beyond the story</p><h1>This page has not been written.</h1><p><a href="'+SITE+'/">Return to the book </a></p></main>'+footer(SITE+'/')+'</body></html>')
+print('Built the story, legacy redirects, sitemap, robots and 404 for '+SITE)
