@@ -34,7 +34,7 @@ travel = [
     ('boarding-the-helicopter', 'Tridib sitting in the doorway of a red and white helicopter', 'Ready for takeoff'),
     ('cockpit-view', 'Two pilots at the controls, seen from behind', 'From behind the cockpit seats'),
     ('in-flight', 'Tridib and a companion smiling inside a helicopter', 'In flight'),
-    ('travel-keepsakes', 'Redacted boarding passes lying over a passport cover', 'Keepsakes from the road'),
+    ('boarding-passes', 'Boarding passes lying over a passport cover', 'Keepsakes from the road', 'travel-keepsakes'),
 ]
 
 archive = [

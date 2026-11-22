@@ -137,3 +137,7 @@
 .coastal-feature img {
   aspect-ratio: 16 / 9;
 }
+
+.travel-keepsakes img {
+  aspect-ratio: auto;
+}
