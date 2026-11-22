@@ -6,4 +6,4 @@ Edit the public story and photo captions in `build.py`, then run `python3 build.
 
 The draft chapters in `content/book.json` are available for future development. Previously published chapter URLs redirect to the public story outline. The memoir recordings are private editorial source material.
 
-The photographs in `assets/photos/` are web-optimized copies of the supplied personal archive. The illustrated cover depicts a symbolic window. The 1200 × 630 card in `assets/bhogi-share.jpg` uses the supplied portrait.
+The photographs in `assets/photos/` are web-optimized copies of the supplied personal archive. The illustrated cover depicts a symbolic window. The 1200 × 630 card in `assets/bhogi-mountain-share.jpg` uses the supplied portrait.

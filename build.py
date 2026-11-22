@@ -9,7 +9,7 @@ DESC='An illustrated introduction to Tridib Nandy’s life, from spiritual roots
 def head(title,path='',prefix='',description=DESC):
  url=SITE+'/'+path
  schema={'@context':'https://schema.org','@type':'WebPage','name':title,'url':url,'description':description,'isPartOf':{'@type':'WebSite','name':data['title'],'alternateName':data['alternateTitle'],'url':SITE+'/'},'about':{'@type':'CreativeWork','name':data['title'],'alternateName':data['alternateTitle'],'author':{'@type':'Person','name':data['author']},'inLanguage':'en','creativeWorkStatus':'Work in progress'}}
- return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)}</title><meta name="description" content="{esc(description)}"><meta name="theme-color" content="#062326"><link rel="canonical" href="{url}"><meta name="robots" content="index,follow"><meta property="og:type" content="website"><meta property="og:site_name" content="Autobiography of a Bhogi"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{url}"><meta property="og:image" content="{SITE}/assets/bhogi-share.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:alt" content="Autobiography of a Bhogi beside a portrait of Tridib Nandy"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:description" content="{esc(description)}"><meta name="twitter:image" content="{SITE}/assets/bhogi-share.jpg"><meta name="twitter:image:alt" content="Autobiography of a Bhogi by Tridib Nandy"><link rel="icon" href="{prefix}favicon.ico" sizes="any"><link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="{prefix}assets/apple-touch-icon.png"><link rel="stylesheet" href="{prefix}assets/style.css"><script type="application/ld+json">{json.dumps(schema,ensure_ascii=False)}</script></head>'''
+ return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)}</title><meta name="description" content="{esc(description)}"><meta name="theme-color" content="#062326"><link rel="canonical" href="{url}"><meta name="robots" content="index,follow"><meta property="og:type" content="website"><meta property="og:site_name" content="Autobiography of a Bhogi"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{url}"><meta property="og:image" content="{SITE}/assets/bhogi-mountain-share.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:alt" content="Autobiography of a Bhogi beside a mountain portrait of Tridib Nandy"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:description" content="{esc(description)}"><meta name="twitter:image" content="{SITE}/assets/bhogi-mountain-share.jpg"><meta name="twitter:image:alt" content="Autobiography of a Bhogi by Tridib Nandy"><link rel="icon" href="{prefix}favicon.ico" sizes="any"><link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="{prefix}assets/apple-touch-icon.png"><link rel="stylesheet" href="{prefix}assets/style.css"><script type="application/ld+json">{json.dumps(schema,ensure_ascii=False)}</script></head>'''
 def header(prefix=''):
  return f'''<a class="skip" href="#main">Skip to content</a><header class="wrap topbar"><a class="brand" href="{prefix}index.html" aria-label="bhogi.life home">bhogi<span>.</span>life</a><nav aria-label="Main navigation"><a href="{prefix}index.html#story">The story</a><a href="{prefix}index.html#archive">Photo archive</a><a href="{prefix}index.html#about">About the book</a></nav></header>'''
 def footer(prefix=''):
@@ -19,10 +19,11 @@ def photo(name, alt, caption, css_class='', priority=False):
     return f'''<figure class="story-photo {css_class}"><img src="assets/photos/{name}.webp" {loading} alt="{esc(alt)}"><figcaption>{esc(caption)}</figcaption></figure>'''
 
 archive = [
-    ('around-the-table', 'A group laughing around a table', 'Around the table'),
+    ('tridib-portrait', 'Tridib Nandy smiling at an outdoor café table', 'Tridib Nandy at a café'),
+    ('around-the-table', 'A group laughing around a table', 'Around the table with Richard Branson'),
     ('bombay-hemp-company', 'Three people smiling beneath a Bombay Hemp Company sign', 'At Bombay Hemp Company'),
     ('ayush-entrance', 'Tridib beside the Ministry of AYUSH entrance sign', 'Outside India’s Ministry of AYUSH'),
-    ('out-on-the-water', 'Two people aboard a white boat', 'Out on the water'),
+    ('out-on-the-water', 'Two people aboard a white boat', 'Bhogimaxxing'),
     ('group-portrait', 'Four people standing together indoors', 'From the personal archive'),
     ('cannabis-market', 'Panoramic view of cannabis retail counters', 'Inside a cannabis marketplace'),
 ]
@@ -36,7 +37,7 @@ index = head('Autobiography of a Bhogi | Tridib Nandy') + '<body>' + header() + 
       <p class="intro">From a pious childhood to early Bitcoin, cannabis, and the traditional healers he met along the way.</p>
       <a class="button" href="#story">Explore the story</a>
     </div>
-    {photo('tridib-portrait', 'Tridib Nandy smiling at an outdoor café table', 'Tridib Nandy', 'hero-portrait', priority=True)}
+    {photo('tridib-mountain', 'Tridib Nandy standing on a stone path above a mountain valley', 'Tridib Nandy', 'hero-portrait', priority=True)}
   </section>
 
   <section class="paper" id="story">
@@ -65,7 +66,6 @@ index = head('Autobiography of a Bhogi | Tridib Nandy') + '<body>' + header() + 
       <div class="prose">
         <h2>Cannabis and the people behind it</h2>
         <p>Cannabis took Tridib into a world of growers, entrepreneurs, and advocates. The photographs bring that part of the story down to earth, from working with the plant by hand to visiting a retail floor and meeting people at Bombay Hemp Company.</p>
-        <p class="story-sources"><a href="https://www.thevalintgroup.com/our-team">Valint Group biography</a></p>
       </div>
     </article>
 
