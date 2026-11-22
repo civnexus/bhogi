@@ -139,5 +139,7 @@
 }
 
 .travel-keepsakes img {
-  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: center;
+  background: #041b1e;
 }
