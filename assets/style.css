@@ -130,3 +130,10 @@
     aspect-ratio: 9 / 16;
   }
 }
+
+.coastal-feature {
+  margin-bottom: 32px;
+}
+.coastal-feature img {
+  aspect-ratio: 16 / 9;
+}

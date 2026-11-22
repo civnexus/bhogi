@@ -114,6 +114,7 @@ index = head('Autobiography of a Bhogi | Tridib Nandy') + '<body>' + header() + 
 
   <section class="wrap section" id="travel">
     <h2>On the road and in the air</h2>
+    {photo('coastal-stop', 'Tridib leaning against a white convertible beside a rocky shoreline', 'A stop along the coast', 'coastal-feature')}
     <div class="photo-grid travel-photos">{''.join(photo(*item) for item in travel)}</div>
     <div class="archive-clips">
       {clip('helicopter-boarding', 'Walking out to the helicopter')}
