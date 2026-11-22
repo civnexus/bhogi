@@ -143,3 +143,41 @@
   object-position: center;
   background: #041b1e;
 }
+
+.music-media {
+  margin-top: 3rem;
+}
+.music-tracks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+}
+.music-media iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  margin-bottom: .5rem;
+}
+.music-media a {
+  font: .82rem Arial, sans-serif;
+}
+.music-media a:hover {
+  color: #795b2d;
+}
+.soundcloud-player,
+.spotify-player {
+  height: 352px;
+  border-radius: 12px;
+}
+.music-talk {
+  margin-top: 3rem;
+  align-items: center;
+}
+.tedx-player {
+  aspect-ratio: 16 / 9;
+}
+@media (max-width: 760px) {
+  .music-tracks {
+    grid-template-columns: 1fr;
+  }
+}
