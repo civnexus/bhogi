@@ -48,6 +48,8 @@ archive = [
     ('out-on-the-water', 'Two people aboard a white boat', 'Bhogimaxxing'),
     ('group-portrait', 'Four people standing together indoors', 'From the personal archive'),
     ('cannabis-market', 'Panoramic view of cannabis retail counters', 'Inside a cannabis marketplace'),
+    ('tridib-at-the-piano', 'Tridib Nandy playing an upright piano', 'At the piano'),
+    ('tridib-micronesia-portrait', 'Tridib Nandy beneath the seal of the Federated States of Micronesia', 'Beneath the seal of the Federated States of Micronesia'),
 ]
 
 index = head('Autobiography of a Bhogi | Tridib Nandy') + '<body>' + header() + f'''
